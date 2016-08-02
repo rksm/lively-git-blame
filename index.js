@@ -43,9 +43,10 @@ export async function annotateRevIn(ed, file, dir, rev = "HEAD", row) {
     return;
   }
 
-  var cmd = file && file !== currentFile ?
-    `git blame -f ${fullRev} -- ${file}` :
-    `git blame -f ${currentFile} ${fullRev}`
+  // var cmd = file && file !== currentFile ?
+  //   `git blame -f ${fullRev} -- ${file}` :
+  //   `git blame -f ${currentFile} ${fullRev}`
+  var cmd = `git blame -f ${fullRev} -- ${file}`;
   var {code, output} = await lively.shell.run(cmd, {dir});
   if (code) {
     ed.showError(new Error(output));
